@@ -150,15 +150,38 @@ router.post('/:code/results', auth, async (req, res) => {
       }
     );
 
-    // Take the top 5 movie results
-    const movies = tmdbRes.data.results.slice(0, 5).map(movie => ({
-      id: movie.id,
-      title: movie.title,
-      overview: movie.overview,
-      poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-      rating: movie.vote_average,
-      releaseDate: movie.release_date
-    }));
+    // Take the top 5 movie results, and for each fetch streaming providers from TMDB
+    const movies = await Promise.all(
+      tmdbRes.data.results.slice(0, 5).map(async (movie) => {
+        let streamingOn = [];
+        try {
+          const providerRes = await axios.get(
+            `https://api.themoviedb.org/3/movie/${movie.id}/watch/providers`,
+            { params: { api_key: process.env.TMDB_API_KEY } }
+          );
+          const us = providerRes.data.results?.US;
+          // flatrate = subscription streaming (Netflix, Hulu, etc) — not rent/buy
+          if (us?.flatrate) {
+            streamingOn = us.flatrate.slice(0, 4).map(p => ({
+              name: p.provider_name,
+              logo: `https://image.tmdb.org/t/p/w45${p.logo_path}`
+            }));
+          }
+        } catch (e) {
+          // silently skip if provider fetch fails for a movie
+        }
+
+        return {
+          id: movie.id,
+          title: movie.title,
+          overview: movie.overview,
+          poster: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+          rating: movie.vote_average,
+          releaseDate: movie.release_date,
+          streamingOn
+        };
+      })
+    );
 
     // Save results and mark room as finished
     room.results = movies;

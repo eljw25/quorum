@@ -115,6 +115,22 @@ function Results() {
                     <p className="movie-rating">⭐ {movie.rating?.toFixed(1)}</p>
                     <p className="movie-date">{movie.releaseDate?.split('-')[0]}</p>
                     <p className="movie-overview">{movie.overview}</p>
+                    {movie.streamingOn?.length > 0 && (
+                      <div className="streaming-row">
+                        {movie.streamingOn.map(p => (
+                          <img
+                            key={p.name}
+                            src={p.logo}
+                            alt={p.name}
+                            title={p.name}
+                            className="streaming-logo"
+                          />
+                        ))}
+                      </div>
+                    )}
+                    {movie.streamingOn?.length === 0 && (
+                      <p className="not-streaming">Not on streaming</p>
+                    )}
                   </div>
                 </div>
               ))}

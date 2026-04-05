@@ -518,6 +518,27 @@ input::placeholder {
   overflow: hidden;
 }
 
+.streaming-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+  align-items: center;
+}
+
+.streaming-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.not-streaming {
+  color: var(--muted);
+  font-size: 0.75rem;
+  margin-top: 0.4rem;
+}
+
 /* ===== TRAILER BUTTON & POSTER OVERLAY ===== */
 .movie-poster-wrap {
   position: relative;
