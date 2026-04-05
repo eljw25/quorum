@@ -400,13 +400,16 @@ input::placeholder {
 
 .winner-badge {
   background: var(--accent);
-  color: var(--text);
-  font-size: 0.65rem;
-  font-weight: 600;
-  padding: 0.15rem 0.4rem;
-  border-radius: 20px;
+  color: white;
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 1.4;
 }
 
 .genre-bar-track {
