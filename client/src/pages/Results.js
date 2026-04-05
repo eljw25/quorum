@@ -114,8 +114,7 @@ function Results() {
                     <h3>{movie.title}</h3>
                     <p className="movie-rating">⭐ {movie.rating?.toFixed(1)}</p>
                     <p className="movie-date">{movie.releaseDate?.split('-')[0]}</p>
-                    <p className="movie-overview">{movie.overview}</p>
-                    {movie.streamingOn?.length > 0 && (
+{movie.streamingOn?.length > 0 && (
                       <div className="streaming-row">
                         {movie.streamingOn.map(p => (
                           <img
