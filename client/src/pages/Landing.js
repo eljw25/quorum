@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../config';
 
 // Landing page — the first thing users see
 // Handles both login and register in one page
@@ -28,7 +29,7 @@ function Landing() {
         ? { email, password }
         : { username, email, password };
 
-      const res = await axios.post(`http://localhost:5000${endpoint}`, payload);
+      const res = await axios.post(`${API_URL}${endpoint}`, payload);
 
       // Save the JWT token and username to localStorage
       // This keeps the user logged in even if they refresh the page

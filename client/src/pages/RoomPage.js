@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import API_URL from '../config';
 
 // The list of genres users can vote on
 const GENRES = [
@@ -12,7 +13,7 @@ const GENRES = [
 
 // Connect to Socket.io server
 // This connection is shared across re-renders using a module-level variable
-const socket = io('http://localhost:5000');
+const socket = io('${API_URL}');
 
 function RoomPage() {
   // Get the room code from the URL e.g. /room/ABC123
@@ -34,7 +35,7 @@ function RoomPage() {
     const fetchRoom = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/rooms/${code}`,
+          `${API_URL}/api/rooms/${code}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setVotes(res.data.votes);
@@ -82,7 +83,7 @@ function RoomPage() {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/rooms/${code}/vote`,
+        `${API_URL}/api/rooms/${code}/vote`,
         { genres: selectedGenres },
         authHeader
       );
@@ -101,7 +102,7 @@ function RoomPage() {
   const handleGetResults = async () => {
     try {
       await axios.post(
-        `http://localhost:5000/api/rooms/${code}/results`,
+        `${API_URL}/api/rooms/${code}/results`,
         {},
         authHeader
       );

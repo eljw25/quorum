@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import API_URL from '../config';
 
 function Results() {
   const { code } = useParams();
@@ -19,7 +20,7 @@ function Results() {
     const fetchResults = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/rooms/${code}`,
+          `${API_URL}/api/rooms/${code}`,
           authHeader
         );
 
