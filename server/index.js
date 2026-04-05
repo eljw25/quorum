@@ -15,16 +15,21 @@ const server = http.createServer(app);
 
 // Attach Socket.io to the HTTP server
 // cors here allows our React frontend to connect to Socket.io
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://quorum-client.onrender.com'
+];
+
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000', // React runs on port 3000
+    origin: allowedOrigins,
     methods: ['GET', 'POST']
   }
 });
 
 // Middleware
-app.use(cors());                  // Allows cross-origin requests from React
-app.use(express.json());          // Parses incoming JSON request bodies
+app.use(cors({ origin: allowedOrigins }));
+app.use(express.json());
 
 // Routes (we'll add these next)
 app.use('/api/auth', require('./routes/auth'));
