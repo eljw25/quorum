@@ -13,7 +13,7 @@ const GENRES = [
 
 // Connect to Socket.io server
 // This connection is shared across re-renders using a module-level variable
-const socket = io('${API_URL}');
+const socket = io(API_URL);
 
 function RoomPage() {
   // Get the room code from the URL e.g. /room/ABC123

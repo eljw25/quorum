@@ -21,7 +21,7 @@ function Home() {
   // Create a new room and navigate into it
   const handleCreate = async () => {
     try {
-      const res = await axios.post('${API_URL}/api/rooms/create', {}, authHeader);
+      const res = await axios.post(`${API_URL}/api/rooms/create`, {}, authHeader);
       navigate(`/room/${res.data.code}`);
     } catch (err) {
       setError('Failed to create room');
@@ -32,7 +32,7 @@ function Home() {
   const handleJoin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('${API_URL}/api/rooms/join', { code: joinCode }, authHeader);
+      const res = await axios.post(`${API_URL}/api/rooms/join`, { code: joinCode }, authHeader);
       navigate(`/room/${res.data.code}`);
     } catch (err) {
       setError(err.response?.data?.message || 'Room not found');
