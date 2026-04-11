@@ -32,5 +32,6 @@ npm install
 # create .env with REACT_APP_API_URL=http://localhost:5000
 npm start
 
-More about this project: [Portfolio](https://jwericlee.vercel.app)
 ```
+
+More about this project: [Portfolio](https://jwericlee.vercel.app)
