@@ -19,16 +19,10 @@ function Results() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const res = await axios.get(
-          `${API_URL}/api/rooms/${code}`,
-          authHeader
-        );
-
+        const res = await axios.get(`${API_URL}/api/rooms/${code}`, authHeader);
         const room = res.data;
         setMovies(room.results);
 
-        // Calculate genre vote counts from the votes array
-        // Same algorithm as the backend — count how many people picked each genre
         const genreCount = {};
         room.votes.forEach(vote => {
           vote.genres.forEach(genre => {
@@ -36,10 +30,7 @@ function Results() {
           });
         });
 
-        // Sort by vote count descending
-        const sorted = Object.entries(genreCount)
-          .sort((a, b) => b[1] - a[1]);
-
+        const sorted = Object.entries(genreCount).sort((a, b) => b[1] - a[1]);
         setGenreScores(Object.fromEntries(sorted));
         setTopGenres(sorted.slice(0, 2).map(e => e[0]));
         setLoading(false);
@@ -73,7 +64,6 @@ function Results() {
         <div className="results-content">
           <h2>Tonight's picks for Room <span>{code}</span></h2>
 
-          {/* Genre vote breakdown */}
           {Object.keys(genreScores).length > 0 && (
             <div className="genre-breakdown">
               <h3>How the group voted</h3>
@@ -86,24 +76,16 @@ function Results() {
                     )}
                   </span>
                   <div className="genre-bar-track">
-                    <div
-                      className="genre-bar-fill"
-                      style={{ width: `${(count / totalVoters) * 100}%` }}
-                    />
+                    <div className="genre-bar-fill" style={{ width: `${(count / totalVoters) * 100}%` }} />
                   </div>
-                  <span className="genre-bar-count">
-                    {count} {count === 1 ? 'vote' : 'votes'}
-                  </span>
+                  <span className="genre-bar-count">{count} {count === 1 ? 'vote' : 'votes'}</span>
                 </div>
               ))}
             </div>
           )}
 
-          {/* Movie results */}
           <div className="movies-section">
-            <h3>
-              Movies matching <strong>{topGenres.join(' & ')}</strong>
-            </h3>
+            <h3>Movies matching <strong>{topGenres.join(' & ')}</strong></h3>
             <div className="movies-grid">
               {movies.map(movie => (
                 <div key={movie.id} className="movie-card">
@@ -114,16 +96,10 @@ function Results() {
                     <h3>{movie.title}</h3>
                     <p className="movie-rating">⭐ {movie.rating?.toFixed(1)}</p>
                     <p className="movie-date">{movie.releaseDate?.split('-')[0]}</p>
-{movie.streamingOn?.length > 0 && (
+                    {movie.streamingOn?.length > 0 && (
                       <div className="streaming-row">
                         {movie.streamingOn.map(p => (
-                          <img
-                            key={p.name}
-                            src={p.logo}
-                            alt={p.name}
-                            title={p.name}
-                            className="streaming-logo"
-                          />
+                          <img key={p.name} src={p.logo} alt={p.name} title={p.name} className="streaming-logo" />
                         ))}
                       </div>
                     )}

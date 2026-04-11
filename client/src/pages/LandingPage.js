@@ -5,22 +5,22 @@ const steps = [
   {
     number: '01',
     title: 'Create a Room',
-    description: 'One person starts a room and gets a shareable code in seconds.'
+    description: 'One person starts a room and gets a shareable 6-character code.'
   },
   {
     number: '02',
     title: 'Friends Join',
-    description: 'Everyone joins with the code — no account required to vote.'
+    description: 'Everyone joins with the code. No app download, no setup.'
   },
   {
     number: '03',
     title: 'Vote on Genres',
-    description: 'Each person picks the genres they\'re feeling tonight. All votes are live.'
+    description: 'Each person picks the genres they\'re feeling. Votes sync live across all clients.'
   },
   {
     number: '04',
     title: 'Get Your Movies',
-    description: 'Quorum finds the movies your whole group can actually agree on.'
+    description: 'Quorum finds the overlap and surfaces movies everyone can actually agree on.'
   }
 ];
 
@@ -29,8 +29,6 @@ function LandingPage() {
 
   return (
     <div className="lp-container">
-
-      {/* NAVBAR */}
       <nav className="lp-nav">
         <h1 className="logo">Quorum</h1>
         <button className="btn-outline-small" onClick={() => navigate('/auth')}>
@@ -38,9 +36,7 @@ function LandingPage() {
         </button>
       </nav>
 
-      {/* HERO */}
       <section className="lp-hero">
-        <div className="lp-badge">🎬 Real-time group movie matching</div>
         <h1 className="lp-title">
           Stop arguing about<br />
           <span className="lp-highlight">what to watch.</span>
@@ -51,13 +47,11 @@ function LandingPage() {
         </p>
         <div className="lp-cta-row">
           <button className="btn-primary lp-cta" onClick={() => navigate('/auth')}>
-            Get Started!
+            Get Started
           </button>
         </div>
       </section>
 
-
-      {/* HOW IT WORKS */}
       <section className="lp-steps">
         <h2 className="lp-section-title">How it works</h2>
         <div className="lp-steps-grid">
@@ -71,12 +65,9 @@ function LandingPage() {
         </div>
       </section>
 
-
-      {/* FOOTER */}
       <footer className="lp-footer">
-        <p>© 2026 Jongwook Lee · <span className="lp-accent">Quorum</span> · All rights reserved.</p>
+        <p>© 2026 Eric Lee · <span className="lp-accent">Quorum</span></p>
       </footer>
-
     </div>
   );
 }

@@ -3,22 +3,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import API_URL from '../config';
 
-// Home page — logged in users can create or join a room here
 function Home() {
   const [joinCode, setJoinCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Get the username from localStorage to display a greeting
   const username = localStorage.getItem('username');
-
-  // Get the JWT token from localStorage to send with requests
   const token = localStorage.getItem('token');
-
-  // Auth header sent with every protected request
   const authHeader = { headers: { Authorization: `Bearer ${token}` } };
 
-  // Create a new room and navigate into it
   const handleCreate = async () => {
     try {
       const res = await axios.post(`${API_URL}/api/rooms/create`, {}, authHeader);
@@ -28,7 +21,6 @@ function Home() {
     }
   };
 
-  // Join an existing room by code
   const handleJoin = async (e) => {
     e.preventDefault();
     try {
@@ -39,7 +31,6 @@ function Home() {
     }
   };
 
-  // Log out — clear localStorage and go back to landing page
   const handleLogout = () => {
     localStorage.clear();
     navigate('/');
@@ -58,14 +49,10 @@ function Home() {
 
         {error && <p className="error">{error}</p>}
 
-        {/* Create Room */}
-        <button onClick={handleCreate} className="btn-primary">
-          + Create Room
-        </button>
+        <button onClick={handleCreate} className="btn-primary">+ Create Room</button>
 
         <div className="divider">or</div>
 
-        {/* Join Room */}
         <form onSubmit={handleJoin} className="join-form">
           <input
             type="text"
