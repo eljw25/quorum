@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const steps = [
@@ -66,7 +65,7 @@ function LandingPage() {
       </section>
 
       <footer className="lp-footer">
-        <p>© 2026 Eric Lee · <span className="lp-accent">Quorum</span></p>
+        <p>© 2026 Eric Lee</p>
       </footer>
     </div>
   );
