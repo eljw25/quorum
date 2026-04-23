@@ -65,7 +65,7 @@ function LandingPage() {
       </section>
 
       <footer className="lp-footer">
-        <p>© 2026 Eric Lee</p>
+        <p>© 2026 Eric Lee. All Rights Reserved.</p>
       </footer>
     </div>
   );
